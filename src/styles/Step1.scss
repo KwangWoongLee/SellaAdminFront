@@ -1,0 +1,32 @@
+// Step1.
+
+.body.step1 {
+  .page {
+    height: calc(100% - 5px);
+  }
+
+  .section {
+    display: inline-block;
+    float: left;
+  }
+
+  h3 {
+    display: table;
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .tablebox1 {
+    width: auto;
+    margin-right: 30px;
+  }
+
+  .tablebox2 tr td:nth-child(4) {
+    text-align: center;
+  }
+
+  .td_btn_add {
+    padding: 10px 0;
+    text-align: center;
+  }
+}

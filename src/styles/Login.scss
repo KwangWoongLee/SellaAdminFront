@@ -1,0 +1,588 @@
+// Login.
+
+.body.login,
+.body.regist,
+.body.registresult,
+.body.searchid,
+.body.searchresult,
+.body.searchpw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.body.login,
+.body.regist,
+.body.registresult,
+.body.searchid,
+.body.searchresult,
+.body.searchpw,
+.mypage .formbox {
+  .videobox {
+    display: block;
+    float: left;
+  }
+
+  .formbox {
+    display: block;
+    width: 320px;
+    height: auto;
+    float: right;
+    margin-left: 70px;
+  }
+
+  .formbox h3 {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    padding-left: 0;
+    text-align: center;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+
+  .formbox label {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #000;
+    line-height: 14px;
+  }
+
+  input:disabled {
+    background-color: #fff;
+    border: 1px solid #ccc !important;
+  }
+
+  .formbox .btnbox {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .formbox .btnbox_left {
+    float: left;
+  }
+
+  .formbox .btnbox_left * {
+    float: left;
+    margin-right: 7px;
+    margin-bottom: 0;
+    width: auto;
+    line-height: 15px;
+  }
+
+  .formbox .btnbox_right {
+    float: right;
+  }
+
+  .formbox .btnbox_right .btn_txt,
+  .formbox .btnbox_right span {
+    line-height: 15px;
+    float: left;
+  }
+
+  .formbox .btnbox_right span {
+    margin: 0 3px;
+  }
+
+  .btn_login {
+    width: 100%;
+    height: 37px;
+    margin-bottom: 20px;
+  }
+
+  .btn_join {
+    display: table;
+    width: auto;
+    height: auto;
+    margin: 0 auto 10px;
+    font-weight: 500;
+    color: #081a51;
+  }
+
+  .inform {
+    display: block;
+    margin-top: 3px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 12px !important;
+    font-size: 12px !important;
+    line-height: 16px;
+    color: green;
+  }
+
+  .inform.red {
+    color: red;
+  }
+
+  .inform1,
+  .inform3 {
+    margin-bottom: 15px;
+  }
+}
+
+.body.regist,
+.body.searchid,
+.body.searchpw,
+.mypage .formbox {
+  .formbox {
+    margin-left: 0;
+    width: 750px;
+  }
+
+  .formbox .leftbox {
+    float: left;
+    width: calc(50% - 15px);
+    margin-right: 30px;
+  }
+
+  .formbox .rightbox {
+    float: left;
+    width: calc(50% - 15px);
+  }
+
+  .formbox h3 {
+    margin-bottom: 50px;
+  }
+
+  .terms > span {
+    float: left;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .terms > input {
+    display: block;
+    float: right;
+  }
+
+  .terms > input + label {
+    display: block;
+    float: right;
+    width: auto;
+    margin-right: 5px;
+    margin-bottom: 0;
+    color: #000;
+  }
+
+  textarea {
+    margin-bottom: 32px;
+    width: 100%;
+    height: 100px;
+    padding: 10px 15px;
+    font-size: 13px;
+    line-height: 22px;
+    border-radius: 7px;
+  }
+
+  .fombox label {
+    margin-bottom: 10px;
+  }
+
+  .inputname {
+    margin-bottom: 25px;
+  }
+
+  .inputagency,
+  .inputagency button {
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .inputagency .dropdown-menu {
+    width: 100%;
+  }
+
+  .inputphone1 {
+    input {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    button {
+      border-top-right-radius: 0 !important;
+    }
+  }
+
+  .inputphone2,
+  .inputid {
+    input {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    input + button {
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+    }
+  }
+
+  .inputpw1 {
+    input {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  .inputpw2 {
+    input {
+      border-top: 0 !important;
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+    }
+  }
+
+  .btn_submit {
+    width: 100%;
+  }
+
+  .btnbox {
+    display: block;
+    float: left;
+    padding: 5px 5px 7px 5px;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    margin-bottom: 0 !important;
+
+    .gender {
+      width: calc(50% - 3px);
+      margin-right: 6px;
+    }
+
+    .local {
+      width: calc(50% - 3px);
+    }
+
+    button {
+      padding: 3px 12px;
+    }
+
+    button.on {
+      font-weight: 500;
+      color: #081a51;
+      background-color: #e1ebff;
+    }
+  }
+}
+
+.body.registresult,
+.body.searchresult {
+  .formbox {
+    width: 500px;
+
+    h3 {
+      margin-bottom: 70px;
+    }
+
+    span {
+      display: inline-block;
+      margin-bottom: 40px;
+      width: 100%;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
+  .formbox.success {
+    p {
+      display: block;
+      margin-bottom: 70px;
+      padding: 30px 0;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: #081a51;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .inform {
+      text-align: left;
+      font-size: 13px !important;
+      font-weight: 500;
+    }
+  }
+
+  .formbox.fail {
+    dl {
+      margin-bottom: 0 !important;
+      padding: 40px 0;
+      border-top: 1px solid #ccc;
+
+      dt {
+        font-size: 15px;
+      }
+
+      dd {
+        margin-top: 20px;
+
+        span {
+          font-size: 15px;
+          line-height: 24px;
+          margin-bottom: 3px;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  button {
+    display: block;
+    margin: 0 auto;
+    height: 40px;
+    width: 100%;
+  }
+
+  .btnbox {
+    button {
+      display: block;
+      float: left;
+      width: calc(50% - 5px);
+    }
+
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+}
+
+.body.searchid,
+.body.searchpw {
+  .formbox {
+    width: 500px;
+  }
+
+  .termsbox {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    div.terms {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #ccc;
+
+      input {
+        float: left;
+        margin-right: 10px;
+      }
+      label {
+        float: left;
+        font-weight: 500;
+        color: #081a51;
+      }
+    }
+
+    ul.terms {
+      margin-bottom: 0;
+      li {
+        display: inline-block;
+        width: 50%;
+      }
+
+      input {
+        float: left;
+        margin-right: 10px;
+      }
+      label {
+        float: left;
+        width: auto;
+        color: #081a51;
+
+        button {
+          margin-left: 10px;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .inputphone1 {
+    input:nth-child(1) {
+      flex: unset;
+      width: 78px;
+      text-align: center;
+      color: #aaa !important;
+      border-top-left-radius: 5px !important;
+      border-bottom-left-radius: 0 !important;
+    }
+
+    input:nth-child(2) {
+      flex: unset;
+      width: calc(100% / 3 - 25px);
+      border-bottom-left-radius: 0 !important;
+    }
+
+    button:nth-child(3) {
+      flex: unset;
+      width: calc(100% / 3 - 25px);
+      text-align: left;
+    }
+
+    input:nth-child(5) {
+      flex: unset;
+      width: calc(100% / 3 - 25px);
+      border-top-right-radius: 5px !important;
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+
+  .inputphone1 {
+    button:nth-child(1) {
+      width: 100px;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 5px !important;
+    }
+
+    input:nth-child(3) {
+      width: calc(100% - 220px);
+      border-radius: 0 !important;
+    }
+
+    button:nth-child(4) {
+      width: 120px;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 5px !important;
+    }
+  }
+
+  .inputphone2 {
+    margin-bottom: 30px;
+
+    input {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+
+  .inform1,
+  .inform2 {
+    margin-bottom: 30px;
+  }
+}
+
+.body.searchpw {
+  .inputid {
+    float: left;
+    margin-right: 10px;
+    width: calc(50% - 5px);
+  }
+  .inputname {
+    float: left;
+    width: calc(50% - 5px);
+  }
+}
+
+.mypage .formbox {
+  .page {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+    overflow: auto;
+
+    h3 {
+      width: 100%;
+      height: auto;
+      font-size: 24px;
+      line-height: 24px;
+      font-weight: 600;
+      text-align: center;
+      color: #000;
+    }
+
+    .formbox {
+      display: inline-block;
+      width: 20%;
+      height: auto;
+    }
+  }
+
+  .input-group {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+
+  label {
+    float: left;
+    width: 100px !important;
+    height: 32px;
+    line-height: 32px !important;
+    margin-right: 10px;
+    margin-bottom: 0 !important;
+    font-size: 13px;
+    font-weight: 500;
+    color: #777 !important;
+  }
+
+  input {
+    display: block;
+    float: right;
+    width: calc(100% - 110px) !important;
+  }
+
+  .inform {
+    display: inline-block;
+    float: right;
+    width: calc(100% - 110px) !important;
+  }
+
+  .inputid,
+  .inputpw1,
+  .inform1,
+  .inform2 {
+    margin-bottom: 25px;
+  }
+
+  .inputpw2 {
+    label {
+      height: 64px;
+      line-height: 64px;
+    }
+
+    input {
+      border: 1px solid #ccc !important;
+    }
+
+    input:nth-child(2) {
+      border-top-left-radius: 5px !important;
+      border-top-right-radius: 5px !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-bottom: 0 !important;
+    }
+  }
+
+  .inputname,
+  .inputcompany {
+    margin-bottom: 10px;
+  }
+
+  .btn_submit {
+    margin: 40px 0 30px;
+  }
+
+  .btn_txt {
+    display: block;
+    margin: 0 auto;
+    font-size: 13px;
+    color: #777;
+  }
+}

@@ -1,0 +1,160 @@
+// Template.
+
+.header {
+  position: relative;
+  padding: 0 50px;
+  width: 100%;
+  height: 90px;
+  background-color: #081a51;
+}
+.header > .logo {
+  display: block;
+  float: left;
+  margin: 30px 0;
+  padding: 0 !important;
+  width: 140px;
+  height: auto;
+}
+.header > .menu {
+  display: inline-block;
+  height: 100%;
+  margin-left: 70px;
+}
+.header > .menu > ul {
+  display: inline-block;
+  text-align: center;
+  width: auto;
+  height: 100%;
+}
+.header > .menu > ul > li {
+  display: flex;
+  align-items: center;
+  float: left;
+  padding: 0 30px;
+  height: 100%;
+}
+.header > .menu > ul > li > .nav-link {
+  font-size: 18px;
+  line-height: auto;
+  font-weight: 400;
+  color: #fff;
+}
+.header > .menu > ul > li > .nav-link span {
+  display: block;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 100;
+  color: #fff;
+  text-align: left;
+  opacity: 0.7;
+}
+.header > .menu > ul.right {
+  float: left;
+  margin-left: 40px;
+}
+.header > .menu > ul.left {
+  width: 200px;
+}
+.header > .menu > ul.left > li {
+  width: 100%;
+  padding: 0;
+  background-color: #1d2f6f;
+}
+.header > .menu > ul.left > li > .nav-link {
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+}
+.header > .menu > ul.left > li > .nav-link > span {
+  width: 100%;
+  text-align: center;
+}
+.header > .menu > ul > li.on {
+  background-color: #f8f9ff;
+}
+.header > .menu > ul > li.on > .nav-link,
+.header > .menu > ul > li.on > .nav-link > span {
+  color: #081a51;
+}
+.header > .member {
+  display: flex;
+  align-items: center;
+  float: right;
+  height: 100%;
+}
+.header > .member > span,
+.header > .member > .nav-link span {
+  display: block;
+  float: left;
+  font-size: 14px;
+  color: #fff;
+  line-height: 24px;
+  cursor: pointer;
+  font-weight: 400;
+}
+.header > .member > .cscenter {
+  margin-right: 30px;
+}
+.header > .member > .nav-link {
+  display: block;
+  float: left;
+  margin: 20px 0 !important;
+  cursor: pointer;
+}
+
+.header > .member > .icon_calculator {
+  margin-top: 3px;
+  margin-right: 3px;
+  width: 16px;
+}
+.header > .member > .nav-link.mcalculator,
+.header > .member > .nav-link.bcalculator,
+.header > .member > .nav-link.icon_member,
+.header > .member > .nav-link.icon_power,
+.header > .member > .nav-link.cschat {
+  padding: 0;
+  margin: 5px !important;
+}
+
+.header > .member .icon_kakao {
+  display: block;
+  float: left;
+  margin-top: 3px;
+  margin-right: 5px;
+  width: 16px;
+}
+
+.header > .member .name {
+  margin: 15px 5px 15px 10px !important;
+  cursor: default;
+}
+
+.header > .member > .nav-link > img {
+  display: block;
+  width: auto;
+  height: 20px;
+}
+
+.header > .member > ul {
+  position: absolute;
+  top: 70px;
+  right: 50px;
+  display: none;
+  width: 120px;
+  height: auto;
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  -webkit-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+}
+.header > .member > ul > li {
+  line-height: 30px;
+  text-align: center;
+  font-size: 14px;
+}
+.header > .member:hover + ul {
+  display: inline-block;
+}

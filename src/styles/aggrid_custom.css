@@ -1,0 +1,226 @@
+/* aggrid_custom. */
+
+.ag-theme-alpine {
+  --ag-header-foreground-color: #fff;
+  --ag-internal-calculated-line-height: auto;
+  --ag-selected-row-background-color: #e8f4fe;
+  --bs-body-color: #000;
+
+  display: inline-block;
+  height: auto !important;
+}
+
+.ag-root-wrapper {
+  border: 0;
+}
+
+.ag-root-wrapper.ag-layout-normal {
+  height: calc(100vh - 247px);
+  -webkit-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.ag-root.ag-layout-normal {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+}
+
+.ag-root-wrapper-body.ag-layout-normal {
+  height: auto;
+}
+
+.ag-header {
+  height: 36px;
+  min-height: 36px;
+  background-color: #182B65;
+  overflow: hidden;
+}
+
+.ag-header-cell {
+  border-right: 1px dotted #ccc;
+}
+
+.ag-header-cell,
+.ag-header-group-cell {
+  padding: 0 10px;
+}
+
+.ag-header-cell-resize::after {
+  display: none;
+}
+
+.ag-pinned-left-header {
+  border-right: 0;
+}
+
+.ag-icon-menu::before {
+  color: #fff;
+}
+
+.ag-header-row {
+  height: 36px;
+}
+
+.ag-body {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.ag-input-field-input {
+  border: 1px solid #ccc;
+}
+
+.ag-ltr .ag-cell {
+  height: auto;
+  min-height: 100%;
+  border-right: 1px dotted #ccc;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 5px 10px;
+  overflow: hidden;
+  line-height: normal;
+  /* text-overflow: unset; */
+}
+
+
+
+.ag-ltr .ag-row-drag,
+.ag-ltr .ag-selection-checkbox,
+.ag-ltr .ag-group-expanded,
+.ag-ltr .ag-group-contracted {
+  margin: 0 !important;
+}
+
+.ag-cell-wrapper {
+  height: 100%;
+}
+
+.ag-cell-value,
+.ag-group-value {
+  font-weight: 300;
+}
+
+.ag-cell,
+.ag-full-width-row .ag-cell-wrapper.ag-row-group {
+  padding: 0 3px;
+  color: #000;
+}
+
+.ag-body-horizontal-scroll-viewport {
+  overflow: auto;
+}
+
+.ag-cell-inline-editing:before,
+.ag-cell-not-inline-editing:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 10px);
+  max-height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ag-cell-inline-editing,
+.ag-cell-not-inline-editing {
+  padding: 5px 20px !important;
+}
+
+.uneditable:before,
+.checkcell:before,
+.td_input:before {
+  display: none;
+}
+
+.ag-cell-not-inline-editing.td_input {
+  padding: 5px 10px !important;
+}
+
+.ag-cell-not-inline-editing.td_input input,
+.ag-cell-not-inline-editing.td_input input:disabled {
+  padding-right: 10px !important;
+}
+
+.ag-cell.txt_red * {
+  color: #d20000 !important;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: right;
+}
+
+.ag-cell.txt_black * {
+  color: #000 !important;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: right;
+}
+
+.ag-cell-inline-editing {
+  background-color: transparent;
+  border-color: transparent !important;
+  padding: 5px 10px !important;
+}
+
+.ag-cell-not-inline-editing.td_input {
+  padding: 5px 10px !important;
+}
+
+.ag-theme-alpine .ag-ltr input[class^=ag-][type=text] {
+  width: 100%;
+  height: calc(100% - 6px);
+}
+
+.ag-theme-alpine>div {
+  width: 100%;
+}
+
+
+input[class^=ag-][type=text]:focus {
+  box-shadow: none !important;
+}
+
+.ag-checkbox-input-wrapper:focus-within,
+.ag-checkbox-input-wrapper:active {
+  box-shadow: unset !important;
+}
+
+.ag-cell,
+.ag-full-width-row .ag-cell-wrapper.ag-row-group {
+  --ag-internal-calculated-line-height: var(--ag-line-height, calc(var(--ag-row-height) - var(--ag-row-border-width)));
+}
+
+.ag-header-cell-label .ag-header-cell-text {
+  white-space: pre-wrap !important;
+}
+
+/* .dropdown-menu.show {
+  display: none !important;
+} */
+
+.dropdown.show,
+.dropdown.show+input,
+.dropdown+input:focus {
+  background-color: #fff !important;
+}
+
+.checkcell {
+  padding: 0 8px !important;
+  margin-top: -1px !important;
+}
+
+.checkcell,
+.codecell {
+  text-indent: 0 !important;
+}
+
+.required {}
+
+.ag-cell-inline-editing .ag-cell-editor .ag-wrapper {
+  min-height: 32px;
+}

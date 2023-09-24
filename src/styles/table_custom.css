@@ -1,0 +1,233 @@
+/* table_custom. */
+
+/* table */
+table {
+  position: relative;
+  float: left;
+  background-color: #fff;
+  border-radius: 7px;
+  -webkit-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+h3 {
+  display: block;
+  margin-bottom: 15px;
+  width: 100%;
+  height: auto;
+  font-size: 15px;
+  line-height: 15px;
+  color: #081a51;
+  font-weight: 500;
+}
+
+h3 span {
+  margin-left: 3px;
+  font-size: 13px;
+  color: #000;
+  font-weight: 600;
+  line-height: 15px;
+}
+
+h3 span:after {
+  content: ' 건';
+  color: #888;
+  font-weight: 300;
+}
+
+h3>button {
+  float: right;
+}
+
+table thead {
+  height: 36px;
+  min-height: 36px;
+  background-color: #182B65;
+  overflow: hidden;
+}
+
+table tbody:empty {
+  min-width: 100%;
+  height: auto;
+  display: block;
+}
+
+table tbody:empty:before,
+.ag-overlay-no-rows-wrapper {
+  content: "데이터가 없습니다.";
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  display: inline-block;
+  margin-left: -150px;
+  width: 300px;
+  height: auto;
+  text-align: center;
+  font-size: 14px;
+  color: #c5c9d6;
+}
+
+table th {
+  padding: 10px 3px 11px;
+  border-right: 1px dotted #ccc;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 300;
+  color: #fff;
+  vertical-align: middle;
+  text-align: center;
+}
+
+table th:last-child {
+  border-right: 0;
+}
+
+table th.required:before {
+  content: "* ";
+  font-size: 15px;
+  color: #D20000;
+  vertical-align: middle;
+}
+
+table th span.sub {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-size: 12px;
+}
+
+table th.required span.sub {
+  text-indent: 10px;
+}
+
+table tr:hover,
+table tr:hover td input {
+  background-color: #e8f4fe !important;
+  cursor: default;
+}
+
+table thead tr:hover {
+  background-color: #182B65 !important;
+}
+
+table tr:hover td input:focus {
+  background-color: #fff !important;
+}
+
+table tr:hover td input[type='radio']:focus,
+table tr:hover td input[type='checkbox']:focus {
+  background-color: transparent !important;
+}
+
+table tr:focus-within {
+  background-color: #e8f4fe !important;
+}
+
+table tr:focus-within input:not(:focus) {
+  background-color: #e8f4fe !important;
+}
+
+table tr.select {
+  background-color: #e8f4fe;
+}
+
+table td {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #000;
+  border-right: 1px dotted #babfc7;
+  border-bottom: 1px dotted #babfc7;
+  vertical-align: middle;
+}
+
+table td:last-child {
+  border-right: 0;
+}
+
+table .btn_del {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+}
+
+table .btn_add {}
+
+table .td_btn_add {
+  text-align: right;
+}
+
+table .td_btn_add .txt_small {
+  margin-right: 5px;
+  line-height: 24px;
+  vertical-align: top;
+}
+
+table input[type='checkbox'] {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  height: auto;
+}
+
+.tablebox {
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: #fff;
+  border-radius: 7px;
+  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.tablebox table {
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: unset;
+  overflow: auto;
+}
+
+table.thead {
+  display: block;
+  height: 36px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+table.thead thead {
+  display: table;
+  width: 100%;
+  height: auto !important;
+}
+
+table.tbody {
+  display: block;
+  width: 100%;
+  height: 659px;
+  border-radius: 0 !important;
+  border-bottom-left-radius: 7px !important;
+  border-bottom-right-radius: 7px !important;
+  overflow-y: auto;
+}
+
+table.tbody tbody {
+  display: table;
+  width: 100%;
+  height: auto;
+}
+
+table.thead td:first-child {
+  border-left-color: #081a51;
+}
+
+.td_small {
+  width: 75px;
+}
+
+.btn_small {
+  float: right;
+}
