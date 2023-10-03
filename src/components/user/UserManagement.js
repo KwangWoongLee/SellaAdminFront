@@ -304,7 +304,7 @@ const UserAcceptModal = React.memo(({ modalState, setModalState, parentEmail }) 
         <Modal.Title>테스트</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <iframe width="100%" height="1000" frameborder="0" scrolling="no" src="http://qa.sella.co.kr:8080/"></iframe>
+        <iframe width="100%" height="1000" frameborder="0" scrolling="no" src="http://localhost:8080/"></iframe>
       </Modal.Body>
     </Modal>
   );

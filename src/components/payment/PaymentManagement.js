@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 
-import { Button, Modal, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Button, Modal, InputGroup, Form } from 'react-bootstrap';
 import Head from 'components/template/Head';
 import Footer from 'components/template/Footer';
 import Body from 'components/template/Body';
@@ -21,15 +21,11 @@ import { logger } from 'util/com';
 const PaymentManagement = () => {
   logger.render('PaymentManagement');
 
-  useEffect(() => {}, []);
-
-  const [detailModalState, setDetailModalState] = useState(false);
   const [modalState, setModalState] = useState(false);
-  const [imgUrl, setImgUrl] = useState('');
 
   //row control
-  const [collapseState, setCollapseState] = useState(false);
   const [rowData, setDatas] = useState([]);
+  const selectedRowData = useRef(null);
   //
 
   // search input
@@ -169,7 +165,13 @@ const PaymentManagement = () => {
             <table className="tbody">
               <tbody>
                 {rowData.slice(offset, offset + limit).map((row, index) => (
-                  <tr style={{ cursor: 'pointer' }}>
+                  <tr
+                    style={{ cursor: 'pointer' }}
+                    onDoubleClick={(e) => {
+                      selectedRowData.current = row;
+                      setModalState(true);
+                    }}
+                  >
                     <td>{row.idx}</td>
                     <td>{row.name}</td>
                     <td>{row.email}</td>
@@ -178,8 +180,8 @@ const PaymentManagement = () => {
                     <td>{row.payment_price}</td>
                     <td>{row.warranty_day}</td>
                     <td>{row.remain_warranty_day}</td>
-                    <td>{row.refund_price}</td>
-                    <td>{'-'}</td>
+                    <td>{row.refund_price ? row.refund_price : '-'}</td>
+                    <td>{row.refund_bank_account ? `${row.refund_bank_name}, ${row.refund_bank_account}` : '-'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -188,12 +190,123 @@ const PaymentManagement = () => {
         </div>
       </Body>
       <Footer />
+
+      <RefundModal
+        modalState={modalState}
+        setModalState={setModalState}
+        parentData={selectedRowData.current}
+      ></RefundModal>
     </>
   );
 };
 
-for (const name in process.env) {
-  logger.info(`${name} = ${process.env[name]}`);
-}
+const RefundModal = React.memo(({ modalState, setModalState, parentData }) => {
+  logger.render('UserAcceptModal');
+  const aidxRef = useRef(null);
+  const emailRef = useRef(null);
+  const paymentPriceRef = useRef(null);
+  const refundRegDateRef = useRef(null);
+  const refundPriceRef = useRef(null);
+  const refundBankRef = useRef(null);
+  const refundStateRef = useRef(null);
+
+  useEffect(() => {
+    const rowData = parentData;
+    if (rowData) {
+      aidxRef.current.value = rowData.aidx;
+      emailRef.current.value = rowData.email;
+      paymentPriceRef.current.value = rowData.payment_price;
+      refundRegDateRef.current.value = rowData.refund_reg_date ? rowData.refund_reg_date : '';
+      refundPriceRef.current.value = rowData.refund_price ? rowData.refund_price : '';
+      refundBankRef.current.value = rowData.refund_bank_account
+        ? `${rowData.refund_bank_name}, ${rowData.refund_bank_account}`
+        : '';
+      refundStateRef.current.value = rowData.refund_state ? rowData.refund_state : '환불 미요청';
+    }
+  }, [parentData]);
+
+  const onClose = () => {
+    setModalState(false);
+  };
+
+  return (
+    <Modal show={modalState} onHide={onClose} className="modal step2">
+      <Modal.Header>
+        <Modal.Title>환불 상세조회</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="formbox">
+          <div className="innerbox">
+            <InputGroup className="inputaidx">
+              <label>aidx</label>
+              <Form.Control
+                ref={aidxRef}
+                disabled={true}
+                type="text"
+                placeholder="aidx"
+                aria-label="id"
+                defaultValue={''}
+              />
+            </InputGroup>
+
+            <InputGroup className="inputemail">
+              <label>ID/Email</label>
+              <Form.Control
+                ref={emailRef}
+                disabled={true}
+                type="text"
+                placeholder="ID/Email"
+                aria-label="id"
+                defaultValue={''}
+              />
+            </InputGroup>
+
+            <InputGroup className="inputpayment_price">
+              <label>결제금액</label>
+              <Form.Control
+                ref={paymentPriceRef}
+                disabled={true}
+                type="text"
+                placeholder="결제금액"
+                aria-label="id"
+                defaultValue={''}
+              />
+            </InputGroup>
+
+            <InputGroup className="inputrefund_require_date">
+              <label>환불요청일</label>
+              <Form.Control
+                ref={refundRegDateRef}
+                type="text"
+                placeholder="환불요청일"
+                aria-label="id"
+                defaultValue={''}
+              />
+            </InputGroup>
+
+            <InputGroup className="inputrefund_price">
+              <label>환불금액</label>
+              <Form.Control ref={refundPriceRef} type="text" placeholder="환불금액" aria-label="id" defaultValue={''} />
+            </InputGroup>
+
+            <InputGroup className="inputrefund_price">
+              <label>환불계좌</label>
+              <Form.Control ref={refundBankRef} type="text" placeholder="환불계좌" aria-label="id" defaultValue={''} />
+            </InputGroup>
+
+            <InputGroup className="inputrefund_price">
+              <label>환불상태</label>
+              <Form.Control ref={refundStateRef} type="text" placeholder="환불상태" aria-label="id" defaultValue={''} />
+            </InputGroup>
+
+            <Button variant="primary" type="submit" form="regist-form" className="btn_blue btn_submit">
+              수정완료
+            </Button>
+          </div>
+        </div>
+      </Modal.Body>
+    </Modal>
+  );
+});
 
 export default React.memo(PaymentManagement);
