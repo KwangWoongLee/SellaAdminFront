@@ -22,7 +22,7 @@ const Home = () => {
     <>
       <Head />
       <Body title={`ver ${process.env.REACT_APP_VERSION}`} myClass={'home'}>
-        <div className="page"></div>
+        <div className="page">테스트</div>
       </Body>
       <Footer />
     </>
