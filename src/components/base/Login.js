@@ -73,7 +73,7 @@ const Login = () => {
       <Head />
       <Body title={`로그인`} myClass={'login'}>
         <Form onSubmit={onSubmit} id="login-modal-form" className="formbox">
-          <h3>관리자 로그인123</h3>
+          <h3>관리자 로그인</h3>
           <InputGroup className="mb-3">
             <label>아이디</label>
             <Form.Control

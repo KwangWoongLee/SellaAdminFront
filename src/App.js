@@ -21,14 +21,12 @@ import ProtectedRoute from 'components/common/ProtectedRoute';
 
 import NavigateCtr from 'components/common/NavigateCtr';
 import UserManagement from 'components/user/UserManagement';
-import UserManagement_Detail from 'components/user/UserManagement_Detail';
-
-import FormManagement from 'components/form/FormManagement';
 
 import PaymentManagement from 'components/payment/PaymentManagement';
-import PaymentManagement_Refund from 'components/payment/PaymentManagement_Refund';
 
 import CSCenterManagement from 'components/cscenter/CSCenterManagement';
+import CSCenterManagement_FAQ from 'components/cscenter/CSCenterManagement_FAQ';
+import CSCenterManagement_Manual from 'components/cscenter/CSCenterManagement_Manual';
 
 //const Router = process.env.REACT_APP_SSR === '1' ? BrowserRouter : HashRouter;
 
@@ -63,15 +61,6 @@ export function App() {
                 </ProtectedRoute>
               }
             />
-
-            <Route
-              path="detail"
-              element={
-                <ProtectedRoute>
-                  <UserManagement_Detail />
-                </ProtectedRoute>
-              }
-            />
           </Route>
 
           <Route path="payment_management">
@@ -83,34 +72,36 @@ export function App() {
                 </ProtectedRoute>
               }
             />
-
-            <Route
-              path="refund"
-              element={
-                <ProtectedRoute>
-                  <PaymentManagement_Refund />
-                </ProtectedRoute>
-              }
-            />
           </Route>
 
-          <Route
-            path="form_management"
-            element={
-              <ProtectedRoute>
-                <FormManagement />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="cscenter_management">
+            <Route
+              path=""
+              element={
+                <ProtectedRoute>
+                  <CSCenterManagement />
+                </ProtectedRoute>
+              }
+            ></Route>
 
-          <Route
-            path="cscenter_management"
-            element={
-              <ProtectedRoute>
-                <CSCenterManagement />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="faq"
+              element={
+                <ProtectedRoute>
+                  <CSCenterManagement_FAQ />
+                </ProtectedRoute>
+              }
+            ></Route>
+
+            <Route
+              path="manual"
+              element={
+                <ProtectedRoute>
+                  <CSCenterManagement_Manual />
+                </ProtectedRoute>
+              }
+            ></Route>
+          </Route>
 
           <Route path="*" element={<h1>Not Found Page</h1>} />
           <Route path="empty" element={null} />

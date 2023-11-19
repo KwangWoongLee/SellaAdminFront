@@ -40,11 +40,6 @@ const Head = () => {
                 결제 관리
               </Nav.Link>
             </li>
-            <li className={_.includes(location.pathname, '/form_management') ? 'on' : ''}>
-              <Nav.Link onClick={onLink} name="/form_management">
-                양식 관리
-              </Nav.Link>
-            </li>
             <li className={_.includes(location.pathname, '/cscenter_management') ? 'on' : ''}>
               <Nav.Link onClick={onLink} name="/cscenter_management">
                 공지사항 관리

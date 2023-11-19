@@ -4,11 +4,12 @@ import { Button, Modal, InputGroup, Form } from 'react-bootstrap';
 import Head from 'components/template/Head';
 import Footer from 'components/template/Footer';
 import Body from 'components/template/Body';
-import { img_src, modal, navigate } from 'util/com';
+import { img_src, modal, navigate, page_reload, time_format_none_time } from 'util/com';
 import request from 'util/request';
 
 import PaymentManagementNavTab from 'components/payment/PaymentManagementNavTab';
 import Recoils from 'recoils';
+import CommonDateModal from 'components/common/CommonDateModal';
 import * as xlsx from 'xlsx';
 import _ from 'lodash';
 
@@ -45,7 +46,7 @@ const PaymentManagement = () => {
         logger.info(data);
         const rowCount = data.length;
         rowCount ? setDatas(() => data) : setDatas([]);
-        rowCount && Math.floor(rowCount / limit) ? setPageCount(Math.floor(rowCount / limit)) : setPageCount(1);
+        rowCount && Math.floor(rowCount / limit) >= 1 ? setPageCount(Math.floor(rowCount / limit)) : setPageCount(1);
         setPage(1);
       }
     });
@@ -88,7 +89,7 @@ const PaymentManagement = () => {
 
         const rowCount = data.length;
         rowCount ? setDatas(() => data) : setDatas([]);
-        rowCount && Math.floor(rowCount / limit) ? setPageCount(Math.floor(rowCount / limit)) : setPageCount(1);
+        rowCount && Math.floor(rowCount / limit) >= 1 ? setPageCount(Math.floor(rowCount / limit)) : setPageCount(1);
         setPage(1);
       }
     });
@@ -104,6 +105,18 @@ const PaymentManagement = () => {
       <Body title={`ver ${process.env.REACT_APP_VERSION}`} myClass={'payment_management'}>
         <PaymentManagementNavTab active="/payment_management" />
         <div className="page">
+          <div className="pagination">
+            <Button onClick={(e) => onPageNext(false)} className="btn_arrow_left">
+              <img src={`${img_src}${icon_arrow_left}`} alt="이전 페이지" />
+            </Button>
+            <span>
+              Page {page} of {pageCount}
+            </span>
+            <Button onClick={(e) => onPageNext(true)} className="btn_arrow_right">
+              <img src={`${img_src}${icon_arrow_right}`} alt="다음 페이지" />
+            </Button>{' '}
+          </div>
+
           <div className="inputbox">
             <input
               name="title"
@@ -174,7 +187,7 @@ const PaymentManagement = () => {
                   >
                     <td>{row.idx}</td>
                     <td>{row.name}</td>
-                    <td>{row.email}</td>
+                    <td>{row.id}</td>
                     <td>{row.phone}</td>
                     <td>{row.payment_date}</td>
                     <td>{row.payment_price}</td>
@@ -202,110 +215,160 @@ const PaymentManagement = () => {
 
 const RefundModal = React.memo(({ modalState, setModalState, parentData }) => {
   logger.render('UserAcceptModal');
-  const aidxRef = useRef(null);
-  const emailRef = useRef(null);
-  const paymentPriceRef = useRef(null);
-  const refundRegDateRef = useRef(null);
   const refundPriceRef = useRef(null);
   const refundBankRef = useRef(null);
-  const refundStateRef = useRef(null);
+  const refundBankAccountRef = useRef(null);
+  const [rowData, setRowData] = useState(null);
+  const [dateModalState, setDateModalState] = useState(false);
+  const [refundState, setRefundState] = useState(0);
 
   useEffect(() => {
-    const rowData = parentData;
-    if (rowData) {
-      aidxRef.current.value = rowData.aidx;
-      emailRef.current.value = rowData.email;
-      paymentPriceRef.current.value = rowData.payment_price;
-      refundRegDateRef.current.value = rowData.refund_reg_date ? rowData.refund_reg_date : '';
-      refundPriceRef.current.value = rowData.refund_price ? rowData.refund_price : '';
-      refundBankRef.current.value = rowData.refund_bank_account
-        ? `${rowData.refund_bank_name}, ${rowData.refund_bank_account}`
-        : '';
-      refundStateRef.current.value = rowData.refund_state ? rowData.refund_state : '환불 미요청';
+    const rowData = _.cloneDeep(parentData);
+
+    setRowData(rowData);
+  }, [modalState]);
+
+  useEffect(() => {
+    if (rowData && refundState === 1) {
+      rowData.refund_reg_date = null;
+      refundPriceRef.current.value = '';
+      refundBankRef.current.value = '';
+      refundBankAccountRef.current.value = '';
     }
-  }, [parentData]);
+
+    setRowData({ ...rowData });
+  }, [refundState]);
 
   const onClose = () => {
+    setRefundState(0);
     setModalState(false);
   };
 
+  const onChangeDate = (date) => {
+    rowData.refund_reg_date = date;
+    setRowData(() => rowData);
+  };
+
+  const onRefundReq = () => {
+    if (!refundPriceRef.current.value || !refundBankRef.current.value || !refundBankAccountRef.current.value) {
+      modal.alert('환불 요청 정보를 입력 해주세요.');
+      return;
+    }
+
+    const refund_data = {
+      ...rowData,
+      refund_price: refundPriceRef.current.value,
+      refund_bank: refundBankRef.current.value,
+      refund_bank_account: refundBankAccountRef.current.value,
+      descript: '',
+    };
+
+    request.post(`payment_management/refund`, { refund_data }).then((ret) => {
+      if (!ret.err) {
+        const { data } = ret.data;
+        page_reload();
+      }
+    });
+  };
+
+  const onCompleteRefund = () => {
+    if (rowData.refund_state !== 1) {
+      modal.alert('환불 진행 상태에서만 환불 완료가 가능합니다.');
+      return;
+    }
+
+    request.post(`payment_management/refund/complete`, { refund_data: { ...rowData } }).then((ret) => {
+      if (!ret.err) {
+        modal.alert('환불 완료 상태로 변경!');
+        page_reload();
+      }
+    });
+  };
+
+  const onCancelRefund = () => {
+    if (rowData.refund_state !== 1) {
+      modal.alert('환불 진행 상태에서만 환불 취소가 가능합니다.');
+      return;
+    }
+
+    request.post(`payment_management/refund/cancel`, { refund_data: { ...rowData } }).then((ret) => {
+      if (!ret.err) {
+        modal.alert('환불 취소 완료!');
+        page_reload();
+      }
+    });
+  };
+
   return (
-    <Modal show={modalState} onHide={onClose} className="modal step2">
-      <Modal.Header>
-        <Modal.Title>환불 상세조회</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="formbox">
-          <div className="innerbox">
-            <InputGroup className="inputaidx">
-              <label>aidx</label>
-              <Form.Control
-                ref={aidxRef}
-                disabled={true}
-                type="text"
-                placeholder="aidx"
-                aria-label="id"
-                defaultValue={''}
-              />
-            </InputGroup>
-
-            <InputGroup className="inputemail">
-              <label>ID/Email</label>
-              <Form.Control
-                ref={emailRef}
-                disabled={true}
-                type="text"
-                placeholder="ID/Email"
-                aria-label="id"
-                defaultValue={''}
-              />
-            </InputGroup>
-
-            <InputGroup className="inputpayment_price">
-              <label>결제금액</label>
-              <Form.Control
-                ref={paymentPriceRef}
-                disabled={true}
-                type="text"
-                placeholder="결제금액"
-                aria-label="id"
-                defaultValue={''}
-              />
-            </InputGroup>
-
-            <InputGroup className="inputrefund_require_date">
-              <label>환불요청일</label>
-              <Form.Control
-                ref={refundRegDateRef}
-                type="text"
-                placeholder="환불요청일"
-                aria-label="id"
-                defaultValue={''}
-              />
-            </InputGroup>
-
-            <InputGroup className="inputrefund_price">
-              <label>환불금액</label>
-              <Form.Control ref={refundPriceRef} type="text" placeholder="환불금액" aria-label="id" defaultValue={''} />
-            </InputGroup>
-
-            <InputGroup className="inputrefund_price">
-              <label>환불계좌</label>
-              <Form.Control ref={refundBankRef} type="text" placeholder="환불계좌" aria-label="id" defaultValue={''} />
-            </InputGroup>
-
-            <InputGroup className="inputrefund_price">
-              <label>환불상태</label>
-              <Form.Control ref={refundStateRef} type="text" placeholder="환불상태" aria-label="id" defaultValue={''} />
-            </InputGroup>
-
-            <Button variant="primary" type="submit" form="regist-form" className="btn_blue btn_submit">
-              수정완료
-            </Button>
+    <>
+      <Modal show={modalState} onHide={onClose} className="modal step2">
+        <Modal.Header>
+          <Modal.Title>환불 상세조회</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="formbox">
+            <div className="innerbox">
+              <label>계정 번호</label> {rowData && rowData.aidx}
+              <br></br>
+              <label>ID</label> {rowData && rowData.id}
+              <br></br>
+              <label>환불 명의(타 명의 X)</label> {rowData && rowData.name}
+              <br></br>
+              <label>결제 금액</label> {rowData && rowData.payment_price}
+              <br></br>
+              <label>환불 상태 변경</label>
+              {rowData && rowData.refund_state === undefined && (
+                <Button className="" onClick={() => setRefundState(1)}>
+                  {' '}
+                  환불 요청
+                </Button>
+              )}
+              {rowData && rowData.refund_state === 1 && (
+                <>
+                  <Button className="" onClick={onCompleteRefund}>
+                    {' '}
+                    환불 완료
+                  </Button>
+                  <Button onClick={onCancelRefund}>환불 취소</Button>
+                </>
+              )}
+              {refundState === 1 && (
+                <>
+                  <InputGroup className="inputrefund_require_date">
+                    <label>환불요청일</label>
+                    {rowData && rowData.refund_reg_date ? time_format_none_time(rowData.refund_reg_date) : '-'}
+                    <Button disabled={refundState !== 1} onClick={() => setDateModalState(true)}>
+                      변경
+                    </Button>
+                  </InputGroup>
+                  <InputGroup className="inputrefund_price">
+                    <label>환불금액</label>
+                    <Form.Control ref={refundPriceRef} type="text" placeholder="환불 금액" aria-label="id" />
+                  </InputGroup>
+                  <InputGroup className="inputrefund_price">
+                    <label>환불은행</label>
+                    <Form.Control ref={refundBankRef} type="text" placeholder="환불은행" aria-label="id" />
+                  </InputGroup>
+                  <InputGroup className="inputrefund_price">
+                    <label>환불계좌</label>
+                    <Form.Control ref={refundBankAccountRef} type="text" placeholder="환불계좌" aria-label="id" />
+                  </InputGroup>
+                  <Button variant="primary" onClick={onRefundReq} className="btn_blue btn_submit">
+                    수정
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      </Modal.Body>
-    </Modal>
+        </Modal.Body>
+      </Modal>
+
+      <CommonDateModal
+        modalState={dateModalState}
+        setModalState={setDateModalState}
+        onChangeDate={onChangeDate}
+      ></CommonDateModal>
+    </>
   );
 });
 

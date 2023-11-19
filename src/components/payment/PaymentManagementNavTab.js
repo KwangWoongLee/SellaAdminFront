@@ -3,10 +3,7 @@ import {} from 'react-bootstrap';
 import { logger } from 'util/com';
 import CommonNavTab from 'components/common/CommonNavTab';
 
-const data = [
-  { name: '/payment_management', desc: '결제 조회' },
-  { name: '/payment_management/refund', desc: '환불' },
-];
+const data = [{ name: '/payment_management', desc: '결제 조회' }];
 const PaymentManagementNavTab = ({ active }) => {
   logger.render('PaymentManagementNavTab');
 

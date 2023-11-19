@@ -48,7 +48,9 @@ const UserManagement = () => {
         logger.info(data);
         const rowCount = data.length;
         rowCount ? setDatas(() => data) : setDatas([]);
-        rowCount && Math.floor(rowCount / limit) ? setPageCount(Math.floor(rowCount / limit)) : setPageCount(1);
+        rowCount && Math.floor(rowCount / limit) >= 1
+          ? setPageCount(Math.floor(rowCount / limit) + 1)
+          : setPageCount(1);
         setPage(1);
       }
     });
@@ -91,7 +93,7 @@ const UserManagement = () => {
 
         const rowCount = data.length;
         rowCount ? setDatas(() => data) : setDatas([]);
-        rowCount && Math.floor(rowCount / limit) ? setPageCount(Math.floor(rowCount / limit)) : setPageCount(1);
+        rowCount && Math.floor(rowCount / limit) >= 1 ? setPageCount(Math.floor(rowCount / limit)) : setPageCount(1);
         setPage(1);
       }
     });
@@ -237,7 +239,7 @@ const UserManagement = () => {
                   <tr style={{ cursor: 'pointer' }}>
                     <td>{row.idx}</td>
                     <td>{row.name}</td>
-                    <td>{row.email}</td>
+                    <td>{row.id}</td>
                     <td>{row.phone}</td>
                     <td>{row.is_payment ? 'Y' : 'N'}</td>
                     <td>{row.is_payment ? row.remain_warranty_day : '-'}</td>

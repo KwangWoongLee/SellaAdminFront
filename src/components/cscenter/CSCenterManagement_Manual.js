@@ -14,14 +14,14 @@ import _ from 'lodash';
 import { logger } from 'util/com';
 import CSCenterManagementNavTab from 'components/cscenter/CSCenterManagementNavTab';
 
-const CSCenterManagement = () => {
-  logger.render('CSCenterManagement');
+const CSCenterManagement_Manual = () => {
+  logger.render('CSCenterManagement_Manual');
 
   const account = Recoils.useValue('CONFIG:ACCOUNT');
   const [rowData, setDatas] = useState([]);
   const [modalState, setModalState] = useState(false);
   useEffect(() => {
-    request.post(`cscenter_management`, {}).then((ret) => {
+    request.post(`cscenter_management/manual`, {}).then((ret) => {
       if (!ret.err) {
         const { data } = ret.data;
         logger.info(data);
@@ -39,7 +39,7 @@ const CSCenterManagement = () => {
   const onDelete = (e) => {
     const idx = e.target.parentNode.parentNode.childNodes[0].innerText;
 
-    request.post(`cscenter_management/delete`, { idx }).then((ret) => {
+    request.post(`cscenter_management/manual/delete`, { idx }).then((ret) => {
       if (!ret.err) {
         page_reload();
       }
@@ -50,7 +50,7 @@ const CSCenterManagement = () => {
     <>
       <Head />
       <Body title={`ver ${process.env.REACT_APP_VERSION}`} myClass={'cscenter_management'}>
-        <CSCenterManagementNavTab active="/cscenter_management" />
+        <CSCenterManagementNavTab active="/cscenter_management/manual" />
         <div className="page">
           <Button onClick={onAdd}>추가</Button>
 
@@ -75,7 +75,7 @@ const CSCenterManagement = () => {
                 {rowData.map((row, index) => (
                   <tr style={{ cursor: 'pointer' }}>
                     <td>{row.idx}</td>
-                    <td>{row.announcement_category}</td>
+                    <td>{row.manual_category}</td>
                     <td>{row.title}</td>
                     <td>{row.content}</td>
                     <td>{row.img_url1}</td>
@@ -116,7 +116,7 @@ const AddModal = React.memo(({ modalState, setModalState }) => {
     };
 
     request
-      .post(`cscenter_management/insert`, { access_token: account.access_token, add_data: add_data })
+      .post(`cscenter_management/manual/insert`, { access_token: account.access_token, add_data: add_data })
       .then((ret) => {
         if (!ret.err) {
           page_reload();
@@ -154,4 +154,4 @@ const AddModal = React.memo(({ modalState, setModalState }) => {
   );
 });
 
-export default React.memo(CSCenterManagement);
+export default React.memo(CSCenterManagement_Manual);
